@@ -9,7 +9,7 @@
 нпже описаны шаги, которые необходимо выполнить
 
 ```
-git clone git@github.com:arjunadas/ansible-role-joomla.git
+git clone [git@github.com:arjunadas/ansible-role-joomla.git](https://github.com/arjunadas/ansible-role-joomla.git)
 
 cd ansible-role-joomla
 
