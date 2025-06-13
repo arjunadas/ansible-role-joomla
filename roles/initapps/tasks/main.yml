@@ -1,0 +1,29 @@
+---
+# tasks file for initapps
+# mkdir -p /etc/nginx/sites-enabled and sites-available
+- name: Create a directory /etc/nginx/sites*
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+    mode: '0755'
+  loop:
+    - /etc/nginx/sites-enabled
+    - /etc/nginx/sites-available
+
+- name: Create the joomla.conf
+  ansible.builtin.template:
+    src: joomla.conf.j2
+    dest: '{{ joomla_nginx_config_file }}'
+    mode: '0644'
+
+- name: Create a symbolic link
+  ansible.builtin.file:
+    src: '{{ joomla_nginx_config_file }}'
+    dest: /etc/nginx/sites-enabled/joomla.conf
+    state: link
+
+- name: Reload nginx
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: restarted

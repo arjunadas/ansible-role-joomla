@@ -1,0 +1,10 @@
+all:
+  hosts:
+    web01:
+      ansible_host: 192.168.0.85
+
+  vars:
+    ansible_user: admin1
+    ansible_password: 123
+    ansible_python_interpreter: auto_silent
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

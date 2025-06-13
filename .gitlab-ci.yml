@@ -1,0 +1,43 @@
+# .gitlab-ci.yml
+stages:
+  - install
+
+variables:
+  role_name: joomla
+
+install_job:
+  stage: install
+  script:
+    - mkdir -p ~/.ssh
+    - echo "HOST *" > ~/.ssh/config
+    - echo "StrictHostKeyChecking no" >> ~/.ssh/config
+    - echo "$SSH_KEY_FOR_GIT" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - git clone git@test-yakurnov-gitlab.rnd.omnichannel.ru:ayakurnov/$role_name.git
+    - cd $role_name
+    - pwd
+    - echo "$PASS_FOR_VAULT" > .vault_pass.txt
+    # create vault
+    - |
+      cat > joomla.vault << EOF
+      ---
+      mysql_user_home: /home/admin
+      mysql_user_name: admin
+      mysql_user_password: $MYSQL_USER_PASSWORD
+      priv: '*.*:ALL'
+      mysql_root_home: /root
+      mysql_root_username: root
+      mysql_root_password: $MYSQL_ROOT_PASSWORD
+      EOF
+    # encrypt vault
+    - ansible-vault encrypt joomla.vault --vault-password-file .vault_pass.txt
+    # install requirements
+    #- ansible-galaxy install -r requirements.yml
+    - ansible-galaxy collection install community.mysql
+    # start play
+    - ansible-playbook -i inventory.yml install_joomla.yml -e "@joomla.vault" --vault-password-file .vault_pass.txt
+  except:
+    changes:
+      - "**/*.md"
+  tags:
+    - molecule_in_docker

@@ -1,0 +1,58 @@
+---
+# roles/mysql/tasks/main.yml
+- name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+# эти пакеты: python3-pip, php-mysql, pymysql
+# нужны для работы с модулем community.mysql.mysql_user,
+# если ansible не используется, то их можно не ставить.
+- name: Install python3-pip and php-mysq packages
+  ansible.builtin.apt:
+    pkg:
+      - python3-pip
+      - php-mysql
+
+- name: Install pymysql python package
+  ansible.builtin.pip:
+    name: pymysql
+
+- name: Install mysql latest version
+  ansible.builtin.apt:
+    name: mysql-server
+    state: latest # noqa package-latest
+
+- name: Get response # проверяем, команда выполнится с пустым паролем?
+  ansible.builtin.command: "mysql -uroot -e 'show databases;'"
+  register: result
+  ignore_errors: true
+  # noqa ignore-errors
+  # noqa no-changed-when
+
+- name: Create new user with password
+  community.mysql.mysql_user:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{ mysql_user_name }}"
+    host: 'localhost'
+    password: "{{ mysql_user_password }}"
+    priv: "{{ priv }}"
+    state: present
+  when: result is succeeded
+
+- name: Create a new database with name 'joomla_db' # это имя БД, в joomla, используется по умолчанию
+  community.mysql.mysql_db:
+    login_unix_socket: /run/mysqld/mysqld.sock
+    name: joomla_db
+    state: present
+  when: result is succeeded
+
+- name: Mysql Configuration - Resetting RootPassword # меняем пароль, только если пароль пустой
+  community.mysql.mysql_user:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: ''
+    name: root
+    host_all: true
+    password: "{{ mysql_root_password }}"
+  when: result is succeeded

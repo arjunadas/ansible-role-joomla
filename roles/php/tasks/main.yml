@@ -1,0 +1,24 @@
+---
+# roles/php/tasks/main.yml
+- name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install php8.1-fpm and php-mysql
+  ansible.builtin.apt:
+    pkg:
+      - php8.1-fpm
+      - php8.1-mysql
+      - php8.1
+      - php8.1-common
+      - php8.1-cli
+      - php8.1-opcache
+      - php8.1-gmp
+      - php8.1-curl
+      - php8.1-intl
+      - php8.1-mbstring
+      - php8.1-xmlrpc
+      - php8.1-gd
+      - php8.1-xml
+      - php8.1-zip

@@ -1,0 +1,40 @@
+---
+# tasks file for joomla
+# mkdir -p {{ joomla_folder }}
+- name: Create a directory joomla_folder
+  ansible.builtin.file:
+    path: '{{ joomla_folder }}'
+    state: directory
+    mode: '0755'
+
+- name: Install unzip
+  ansible.builtin.apt:
+    name: unzip
+
+# wget https://github.com/joomla/joomla-cms/releases/download/5.1.4/Joomla_5.1.4-Stable-Full_Package.zip -O /tmp/joomla.zip
+- name: Download Joomla_5.1.zip and unarchive
+  ansible.builtin.unarchive:
+    src: https://github.com/joomla/joomla-cms/releases/download/5.1.4/Joomla_5.1.4-Stable-Full_Package.zip
+    dest: '{{ joomla_folder }}'
+    remote_src: true
+
+# - name: Download Joomla_5.1.zip
+#  ansible.builtin.get_url:
+#    url: https://github.com/joomla/joomla-cms/releases/download/5.1.4/Joomla_5.1.4-Stable-Full_Package.zip
+#    dest: /tmp/joomla.zip
+#    mode: '0644'
+
+# unzip joomla.zip -d {{ joomla_folder }}
+# - name: Extract joomla.zip
+#  ansible.builtin.unarchive:
+#    src: /tmp/joomla.zip
+#    dest: '{{ joomla_folder }}'
+
+# chown -R www-data: /var/www/sites/joomla
+- name: Recursively change ownership of a directory joomla_folder
+  ansible.builtin.file:
+    path: '{{ joomla_folder }}'
+    state: directory
+    recurse: true
+    owner: '{{ nginx_user }}'
+    group: '{{ nginx_user }}'
