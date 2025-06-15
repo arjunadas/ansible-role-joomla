@@ -11,6 +11,13 @@ Ubuntu 22.04
 
 нпже описаны шаги, которые необходимо выполнить
 
+1) в файле install_joomla.yml
+указать ip адрес целевой машины
+```
+joomla_ip: 192.168.0.85
+```
+
+2) далее по инструкции:
 ```
 git clone https://github.com/arjunadas/ansible-role-joomla.git
 
@@ -24,7 +31,7 @@ cat > inventory.yml << EOF
 all:
   hosts:
     web01:
-      ansible_host: 192.168.0.65 # write your address, where we will install the role.
+      ansible_host: 192.168.0.85 # write your address, where we will install the role.
 
   vars:
     ansible_user: admin1 # write your username and password
