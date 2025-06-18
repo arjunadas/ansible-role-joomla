@@ -54,7 +54,7 @@ cat > joomla.vault << EOF
 ---
 mysql_user_name: admin
 mysql_user_password: LNGsgS4rxC7t7KmLaP9q
-priv: '*.*:ALL'
+mysq_priv: '*.*:ALL'
 mysql_root_username: root
 mysql_root_password: iDaeKZDGlU5vBLsaoZvt
 EOF
