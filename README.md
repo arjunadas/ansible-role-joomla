@@ -1,23 +1,24 @@
-данный плейбук: install_joomla.yml
+this playbook: install_joomla.yml
 
-устанавливает стек:
-- nginx:1.18
-- php:8.1
-- mysql:8
-- joomla:5.1
+installs the stack:
 
-проверено на ОС:
+nginx:1.18
+php:8.1
+mysql:8
+joomla:5.1
+
+tested on OS: 
 Ubuntu 22.04
 
-нпже описаны шаги, которые необходимо выполнить
+Below are the steps to follow
 
-1) в файле install_joomla.yml
-указать ip адрес целевой машины
+1) in the file install_joomla.yml
+specify the ip address of the target machine
 ```
-joomla_ip: 192.168.0.85 # укажите своё значение
+joomla_ip: 192.168.0.85 # enter your address
 ```
 
-2) далее по инструкции:
+2) then follow the instructions:
 ```
 git clone https://github.com/arjunadas/ansible-role-joomla.git
 
