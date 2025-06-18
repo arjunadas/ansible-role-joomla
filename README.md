@@ -3,8 +3,11 @@ this playbook: install_joomla.yml
 installs the stack:
 
 nginx:1.18
+
 php:8.1
+
 mysql:8
+
 joomla:5.1
 
 tested on OS: 
