@@ -1,0 +1,5 @@
+dependencies:
+  - role: nginx
+  - role: mysql
+  - role: php
+  - role: joomla
