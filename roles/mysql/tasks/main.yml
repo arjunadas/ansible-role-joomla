@@ -37,7 +37,7 @@
     name: "{{ mysql_user_name }}"
     host: 'localhost'
     password: "{{ mysql_user_password }}"
-    priv: "{{ priv }}"
+    priv: "{{ mysq_priv }}"
     state: present
   when: result is succeeded
 

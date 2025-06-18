@@ -24,7 +24,7 @@ install_job:
       mysql_user_home: /home/admin
       mysql_user_name: admin
       mysql_user_password: $MYSQL_USER_PASSWORD
-      priv: '*.*:ALL'
+      mysql_priv: '*.*:ALL'
       mysql_root_home: /root
       mysql_root_username: root
       mysql_root_password: $MYSQL_ROOT_PASSWORD

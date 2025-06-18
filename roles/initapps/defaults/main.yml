@@ -1,5 +1,5 @@
 ---
 # defaults file for initapps
-joomla_nginx_config_file: /etc/nginx/sites-available/joomla.conf
-joomla_ip: 127.0.0.1
-joomla_folder: /var/www/sites/joomla
+joomla_nginx_config_file: /etc/nginx/sites-available/joomla.conf # noqa var-naming
+joomla_ip: 127.0.0.1 # noqa var-naming
+joomla_folder: /var/www/sites/joomla # noqa var-naming

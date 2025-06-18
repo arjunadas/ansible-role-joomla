@@ -1,4 +1,4 @@
 ---
 # defaults file for joomla
 joomla_folder: /var/www/sites/joomla
-nginx_user: www-data
+nginx_user: www-data # noqa var-naming

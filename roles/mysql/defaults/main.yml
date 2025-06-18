@@ -3,4 +3,4 @@
 mysql_user_name: admin
 mysql_user_password: ""
 mysql_root_password: ""
-priv: '*.*:ALL'
+mysql_priv: '*.*:ALL'
