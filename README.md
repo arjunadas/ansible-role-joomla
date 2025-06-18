@@ -38,8 +38,8 @@ all:
       ansible_host: 192.168.0.85 # write your address, where we will install the role.
 
   vars:
-    ansible_user: admin1 # write your username and password
-    ansible_password: 123456 # write your username and password
+    ansible_user: admin1 # write your username for remote server
+    ansible_password: 123456 # write your password for remote server
     ansible_python_interpreter: auto_silent
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 EOF
