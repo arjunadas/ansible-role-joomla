@@ -3,16 +3,14 @@
 # sudo apt update
 ---
 # roles/php/tasks/main.yml
-- name: Add ppa repository for PHP
-  ansible.builtin.apt_repository:
-    repo: ppa:ondrej/php
-    update_cache: true
-    cache_valid_time: 3600    
-    
 - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
   ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 3600
+
+- name: Add ppa repository for PHP
+  ansible.builtin.apt_repository:
+    repo: ppa:ondrej/php
 
 - name: Install php8.1-fpm and php-mysql
   ansible.builtin.apt:

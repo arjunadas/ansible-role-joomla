@@ -14,15 +14,15 @@
       - python3-pip
       - php-mysql
       - python3-pymysql
-      
-#- name: Install pymysql python package
+
+# - name: Install pymysql python package
 #  ansible.builtin.pip:
 #    name: pymysql
 
-- name: Install mysql 
+- name: Install mysql
   ansible.builtin.apt:
    # name: mysql-server
-    name: mysql-server #=8.0.42-0ubuntu0.22.04.1
+    name: mysql-server # =8.0.42-0ubuntu0.22.04.1
     state: present
 
 - name: Get response # проверяем, команда выполнится с пустым паролем?
