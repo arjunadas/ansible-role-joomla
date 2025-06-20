@@ -4,7 +4,7 @@
   hosts: all
   become: true
   vars:
-# этот адрес указан,вместо имени сайта, в /etc/nginx/sites-available/joomla.conf
+# This address is specified in the file: /etc/nginx/sites-available/joomla.conf
     joomla_ip: 192.168.0.92
     joomla_folder: /var/www/sites/joomla
     joomla_nginx_config_file: /etc/nginx/sites-available/joomla.conf
