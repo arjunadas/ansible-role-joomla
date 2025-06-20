@@ -1,3 +1,6 @@
+# переделать под ubuntu 24, там нет версии 8,1 сделать через ppa
+# sudo add-apt-repository ppa:ondrej/php
+# sudo apt update
 ---
 # roles/php/tasks/main.yml
 - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
