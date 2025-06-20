@@ -1,3 +1,7 @@
+# переделать под ubuntu 24, там нет версии 18 сделать через добавление репы:
+#curl https://nginx.org/keys/nginx_signing.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/nginx.gpg
+#echo "deb https://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+#sudo apt update
 ---
 # tasks file for nginx
 - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
