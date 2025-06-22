@@ -19,10 +19,10 @@
 #  ansible.builtin.pip:
 #    name: pymysql
 
-- name: Install mysql
+- name: Install mysql 8.0
   ansible.builtin.apt:
    # name: mysql-server
-    name: mysql-server # =8.0.42-0ubuntu0.22.04.1
+    name: mysql-server=8.0.42-0ubuntu0.22.04.1
     state: present
 
 - name: Get response # проверяем, команда выполнится с пустым паролем?
